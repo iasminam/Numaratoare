@@ -1,0 +1,174 @@
+module JK_flip_flop(input J, K, EN, CLR, output reg Q); 
+  initial begin 
+    Q = 1'b0; 
+  end 
+
+  always @(posedge EN or negedge CLR) begin 
+    if(CLR == 0) begin 
+      Q <= 'bz; 
+    end else 
+    if(EN == 1) begin 
+      case ({J, K}) 
+        2'b00: Q <= Q;
+        2'b01: Q <= 0;
+        2'b10: Q <= 1; 
+        2'b11: Q <= ~Q; 
+      endcase 
+    end 
+  end 
+endmodule 
+
+module JK_sync_counter #(parameter w=3)(input clk, CLR_counter, output reg [w-1:0] count);
+  
+  wire [w:0]g;
+  
+  initial count=0;
+  
+  JK_flip_flop JK1(.J(1'b1), .EN(clk), .K(1'b1), .Q(g[0]), .CLR(CLR_counter));
+  JK_flip_flop JK2(.J(g[0]), .EN(clk), .K(g[0]), .Q(g[1]), .CLR(CLR_counter));
+  
+  genvar i;
+  generate
+    for(i=2;i<=w;i=i+1)begin
+      
+      JK_flip_flop this_flip_flop(.J(&g[i-1:0]), .EN(clk) , .K(&g[i-1:0]), .Q(g[i]), .CLR(CLR_counter));
+    end
+  endgenerate
+  
+  always@(*)count=g[w:1];
+  
+endmodule
+
+module JK_sync_counter_clear #(parameter w=3) (input clk, input [w-1:0] CLR_value, output  [w-1:0] count);
+  
+  wire g_CLR;  
+  assign g_CLR=~(CLR_value==count);
+
+  JK_sync_counter #(w) this_counter(.clk(clk), .CLR_counter(g_CLR), .count(count));
+    
+endmodule
+
+module JK_sync_to_async #(parameter w=3)(input clk, input [w-1:0] CLR_value, output [w-1:0] count1, count2);
+  
+  wire g_CLR, h_CLR;
+  
+  assign g_CLR=~(CLR_value==count1);
+  assign h_CLR=~(CLR_value==count2);
+
+  JK_async_counter #(w) this_counter1(.clk(clk), .CLR_counter(g_CLR), .count(count1));
+  JK_sync_counter #(w) this_counter2(.clk(clk), .CLR_counter(h_CLR), .count(count2));
+
+
+endmodule
+
+module JK_sync_counter_tb;
+  
+  localparam w=3;
+  
+  reg clk;
+  reg [w-1:0] CLR_value;
+  wire [w-1:0] count;
+  
+  initial begin
+      clk = 0;
+      CLR_value=3'b101;
+      repeat(20) #2 clk = ~clk;
+  end 
+    
+  initial begin
+
+    $display("CLK\t COUNT\t");
+    $monitor("clk:%b\t count:%b\t",clk, count);
+  
+  end
+  
+  JK_sync_counter_clear #(w) uut(.clk(clk), .count(count), .CLR_value(CLR_value));
+  
+endmodule
+
+module JK_async_counter #(parameter w=3)(input clk, CLR_counter, output reg[w-1:0] count);
+  
+  wire [w:0] g;
+  
+  initial count=0;
+  
+  genvar i;
+  generate
+    for(i=0;i<w;i=i+1)begin
+      
+      JK_flip_flop this_flip_flop1(.J(1'b1), .K(1'b1), .EN(~g[i]), .CLR(CLR_counter) , .Q(g[i+1]));
+      
+    end
+  endgenerate  
+  
+  assign g[0]= clk;
+  always@(*)count=g[w:1];
+  
+endmodule
+
+module JK_async_counter_clear #(parameter w=3)(input clk, input [w-1:0] CLR_value, output [w-1:0] count);
+  
+  wire g_CLR;
+    
+  assign g_CLR=~(CLR_value==count);
+
+  JK_async_counter #(w) this_counter(.clk(clk), .CLR_counter(g_CLR), .count(count));
+   
+endmodule
+
+module JK_async_counter_tb;
+  
+  localparam w=3;
+  
+  reg clk;
+  
+  reg [w-1:0] CLR_value;
+  wire [w-1:0] count;
+  
+  initial begin
+      clk = 0;
+      CLR_value=3'b101;
+      repeat(20) #2 clk = ~clk;
+  end 
+    
+  initial begin
+
+    $display("CLK\t COUNT\t");
+    $monitor("clk:%b\t count:%b\t",clk, count);
+  
+  end
+  
+  JK_async_counter_clear #(w) uut(.clk(clk), .CLR_value(CLR_value), .count(count));
+  
+endmodule
+
+module JK_async_sync_tb;
+  
+  localparam w=3;
+  
+  reg clk;
+  
+  reg [w-1:0] CLR_value;
+  reg [w-1:0] CLR_value1;
+  
+  wire [w-1:0] count1;
+  wire [w-1:0] count2;
+  
+  initial begin
+      clk = 0;
+      CLR_value=3'b101;
+      CLR_value1=3'b101;
+      repeat(20) #2 clk = ~clk;
+  end 
+    
+  initial begin
+
+    $display("CLK\t COUNT1\t COUNT2\t");
+    $monitor("clk:%b\t count1:%b\t count2:%b\t",clk, count1, count2);
+  
+  end
+  
+  JK_async_counter_clear #(w) uut1(.clk(clk), .CLR_value(CLR_value), .count(count1));
+  JK_sync_counter_clear #(w) uut2(.clk(clk), .CLR_value(CLR_value1), .count(count2));
+  
+endmodule

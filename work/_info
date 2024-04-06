@@ -1,0 +1,140 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\Iasmina Martinovici\OneDrive\Desktop\proiect AC
+vJK_async_counter
+!s100 [W97A`K;1IE?N5jLcHQ2]2
+IAm9WHfC;8C^AnbWR[[nIA2
+VRiT8EDH0A=K:75bh2g>n@0
+Z1 w1671172384
+Z2 8COUNTER.v
+Z3 FCOUNTER.v
+L0 89
+Z4 OV;L;6.5b;42
+r1
+!s85 0
+31
+!s101 -O0
+o-O0
+n@j@k_async_counter
+vJK_async_counter_clear
+!s100 dm<`oCUA_kel50YYBKg<_0
+IimR5CVihg^_Ed^?UG8j]<0
+VziQoP29Sb72[^K^^gm94W0
+R1
+R2
+R3
+L0 109
+R4
+r1
+!s85 0
+31
+!s101 -O0
+o-O0
+n@j@k_async_counter_clear
+vJK_async_counter_tb
+!s100 Fi:ede=_>ZMhW3F2lma3C0
+IUne?9:S83@XiHNzLCinZf2
+VaQGXWQa9CZ5Ql[d_F51c63
+R1
+R2
+R3
+L0 119
+R4
+r1
+!s85 0
+31
+!s101 -O0
+o-O0
+n@j@k_async_counter_tb
+vJK_async_sync_tb
+!s100 d0e6GUEB]:@X?225jlIfT1
+I:2c_gP]o4YSH573<lz?FQ1
+VOQ[EZ]ZRA3g6E5gBSXmJG2
+R1
+R2
+R3
+L0 145
+R4
+r1
+!s85 0
+31
+!s101 -O0
+o-O0
+n@j@k_async_sync_tb
+vJK_flip_flop
+!s100 A0[`<KPSUlegTTJzV7E^c1
+IXGReEBgKGEe5CkdMJ0E7`1
+VIQ^NmLg7I[FQK88J8zQa01
+R1
+R2
+R3
+L0 1
+R4
+r1
+!s85 0
+31
+!s101 -O0
+o-O0
+n@j@k_flip_flop
+vJK_sync_counter
+!s100 lA6=L;NZE1=OP1=0K`8YE1
+I351MC0enhjzhc1>og9>bX1
+V5K=nHnnK9WhWHm;ZLB7PB1
+R1
+R2
+R3
+L0 21
+R4
+r1
+!s85 0
+31
+!s101 -O0
+o-O0
+n@j@k_sync_counter
+vJK_sync_counter_clear
+!s100 S<HGa2DggMR41jbR4LefK1
+I414FiaHNj?bb=90[EHd6R2
+V2lLPcMJPT81l:3F93]g7[0
+R1
+R2
+R3
+L0 42
+R4
+r1
+!s85 0
+31
+!s101 -O0
+o-O0
+n@j@k_sync_counter_clear
+vJK_sync_counter_tb
+!s100 R3UnQ36RmE>0[l5fYM6G50
+IIo_VjL6dTW]fDe5J9DBbO2
+VXPKS[<TL@h4^>:S?ESeFc1
+R1
+R2
+R3
+L0 64
+R4
+r1
+!s85 0
+31
+!s101 -O0
+o-O0
+n@j@k_sync_counter_tb
+vJK_sync_to_async
+!s100 ALmK_QK75;fJOec6hmNeH2
+IGhHURTi`6>FR=KS=Z7Wnj0
+V2=97:iEILk8RNG15BBOWc2
+R1
+R2
+R3
+L0 51
+R4
+r1
+!s85 0
+31
+!s101 -O0
+o-O0
+n@j@k_sync_to_async

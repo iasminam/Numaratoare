@@ -1,0 +1,19 @@
+{C:/Users/Iasmina Martinovici/OneDrive/Desktop/proiect AC/COUNTER.v} {1 {vlog -work work -nocovercells {C:/Users/Iasmina Martinovici/OneDrive/Desktop/proiect AC/COUNTER.v}
+Model Technology ModelSim ALTERA vlog 6.5b Compiler 2009.10 Oct  1 2009
+-- Compiling module JK_flip_flop
+-- Compiling module JK_sync_counter
+-- Compiling module JK_sync_counter_clear
+-- Compiling module JK_sync_to_async
+-- Compiling module JK_sync_counter_tb
+-- Compiling module JK_async_counter
+-- Compiling module JK_async_counter_clear
+-- Compiling module JK_async_counter_tb
+-- Compiling module JK_async_sync_tb
+
+Top level modules:
+	JK_sync_to_async
+	JK_sync_counter_tb
+	JK_async_counter_tb
+	JK_async_sync_tb
+
+} {} {}}
